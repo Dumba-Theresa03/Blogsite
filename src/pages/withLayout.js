@@ -13,6 +13,8 @@ return(
        <span className='nav-link'><Link to="/">Home</Link></span>
        <span className='nav-link'><Link to="/about">About</Link></span>
        <span className='nav-link'><Link to="/blog">Blog</Link></span>
+       <span className='nav-link'><Link to="/services">Services</Link></span>
+
 </nav>
 </div>
 
