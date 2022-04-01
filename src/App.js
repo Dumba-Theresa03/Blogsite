@@ -2,9 +2,10 @@ import React from 'react'
 import Home from './pages/Home'
 import {Routes, Route, Navigate} from "react-router-dom"
 import About from './pages/About'
-import Blog from './pages/Blog/Blog'
-import Services from './pages/Services'
+import Blog from './pages/Blog/blog'
 import Contact from './pages/Contact'
+import BlogList from './pages/Blog/blog'
+import BlogDetails from './pages/Blog/detail'
 
 function App() {
   return (
@@ -12,10 +13,9 @@ function App() {
    <Route path="/" element={<Home/>} />
    <Route path="/about" element={<About/>} />
    <Route path="/blog" element={<Blog/>} />
+   <Route index element={<BlogList/>}/>
+  
    <Route path="*" element={<Navigate to="/"/>} />
-  <Route path='/services' element={<Services />}/>
-    <Route path='/contact' element={<Contact />} />
-    
     </Routes>
   )
 }

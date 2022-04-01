@@ -1,49 +1,43 @@
-import React from 'react'
-import withLayout from '../withLayout'
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function Blog() {
-  return (
- <div>
-   <h1>My BlogPage</h1> 
-    <div>
-    <p> in the reign of his great-grandmother Queen Victoria, 
-    he was named Albert at birth after his great-grandfather Albert,
-     Prince Consort, and was known as "Bertie" to his family and close friends. 
-     His father ascended the throne as King George V in 1910. As the second son of 
-     the king, Albert was not expected to inherit the throne. He spent his early life 
-     in the shadow of his elder brother, Prince Edward, the heir apparent. 
-     Albert attended naval college as a teenager and served in the Royal Navy and Royal Air Force during the First World War. In 1920, he was made Duke of York. He married Lady Elizabeth Bowes-Lyon in 1923, and they had two daughters, Elizabeth and Margaret. In the mid-1920s, he had speech therapy for a stammer, which he learned to manage to some degree. His elder brother ascended the throne as Edward VIII after their father died in 1936, but Edward abdicated later that year to marry the twice-divorced American socialite Wallis Simpson; Albert thereby became the third monarch of the House of Windsor, 
-    taking the regnal name George VI.</p>
 
-    <p> in the reign of his great-grandmother Queen Victoria, 
-    he was named Albert at birth after his great-grandfather Albert,
-     Prince Consort, and was known as "Bertie" to his family and close friends. 
-     His father ascended the throne as King George V in 1910. As the second son of 
-     the king, Albert was not expected to inherit the throne. He spent his early life 
-     in the shadow of his elder brother, Prince Edward, the heir apparent. 
-     Albert attended naval college as a teenager and served in the Royal Navy and Royal Air Force during the First World War. In 1920, he was made Duke of York. He married Lady Elizabeth Bowes-Lyon in 1923, and they had two daughters, Elizabeth and Margaret. In the mid-1920s, he had speech therapy for a stammer, which he learned to manage to some degree. His elder brother ascended the throne as Edward VIII after their father died in 1936, but Edward abdicated later that year to marry the twice-divorced American socialite Wallis Simpson; Albert thereby became the third monarch of the House of Windsor, 
-    taking the regnal name George VI.</p>
+function BlogList(){
+    const navigate =useNavigate()
+    const [posts, setPosts] = useState([])
 
-    <p> in the reign of his great-grandmother Queen Victoria, 
-    he was named Albert at birth after his great-grandfather Albert,
-     Prince Consort, and was known as "Bertie" to his family and close friends. 
-     His father ascended the throne as King George V in 1910. As the second son of 
-     the king, Albert was not expected to inherit the throne. He spent his early life 
-     in the shadow of his elder brother, Prince Edward, the heir apparent. 
-     Albert attended naval college as a teenager and served in the Royal Navy and Royal Air Force during the First World War. In 1920, he was made Duke of York. He married Lady Elizabeth Bowes-Lyon in 1923, and they had two daughters, Elizabeth and Margaret. In the mid-1920s, he had speech therapy for a stammer, which he learned to manage to some degree. His elder brother ascended the throne as Edward VIII after their father died in 1936, but Edward abdicated later that year to marry the twice-divorced American socialite Wallis Simpson; Albert thereby became the third monarch of the House of Windsor, 
-    taking the regnal name George VI.</p>
-    
-    
-    
-    
-    
-    
-    </div>
-    
-    
-    
+    useEffect(()=>{
+        (async()=>{
+            let res = await fetch("/posts.json");
+            setPosts(await res.json())
+        
+    })()
+},[])
+    const handleClick=(id)=>{
+    const post = posts[id-1];
+        navigate(`/blog/${post.slug}`, {state: {post}});
+    }
+
+    return(
+        <div>
+        <div>
+        {posts.map((post)=>(
+            <div key={post.id}
+            style = {{display: "flex", margin: "20px 0"}}>
+            <img src={`/images/${post.image}`}
+            alt ="" height={200} width={200}/>
+<div>
+<h3>{post.title}</h3>
+<p>{post.extract}</p>
+<button className="btn-contain"
+onClick={()=>handleClick(post.id)}
+style={{alignself: "end"}}>Read More</button>
+
 </div>
-  )
+</div>
+    ))}
+</div>
+</div>
+    )
 }
-
-export default withLayout(Blog)
+export default BlogList
