@@ -1,7 +1,7 @@
-import { Outlet } from "react-router-dom"
-import withLayout from "..withLayout"
+import {Outlet} from "react-router-dom"
+import withlayout from "../withLayout"
 
 function Blog(){
-    return<Outlet/>;
-
+  return<Outlet/>;
 }
+export default withlayout(Blog);
